@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Card from "../components/CardUi/Card";
 import { useEffect, useState } from "react";
 

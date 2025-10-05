@@ -3,7 +3,7 @@ import Card from "../components/CardUi/Card";
 import { useEffect, useState } from "react";
 
 const SharedPage = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
   const location = useLocation();
   const [sharedData, setSharedData] = useState<any[]>([]);
 

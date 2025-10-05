@@ -103,12 +103,12 @@ const HomePage = ()=>{
         credentials: "include",
       });
       const jsonData = await res.json();
-      const shareData = jsonData.data;
+      // const shareData = jsonData.data;
       //sharing/generating the link
       if (res.ok) {
         // Encode your data as a query parameter
         const encodedData = encodeURIComponent(JSON.stringify(jsonData.data));
-        const shareLink = `${FRONTEND_BASE_URL}/share/${userId}?data=${encodedData}`;
+        const shareLink = `${API_BASE_URL}/share/${userId}?data=${encodedData}`;
        
         navigator.clipboard.writeText(shareLink)
         .then(() => {

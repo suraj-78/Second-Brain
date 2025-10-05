@@ -7,6 +7,8 @@ import Modal from "../components/ModalUi/Modal";
 import Card from "../components/CardUi/Card";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const HomePage = ()=>{
   const navigate = useNavigate();
   const [modal,setModal] = useState(false);
@@ -33,7 +35,7 @@ const HomePage = ()=>{
         return;
       }
 
-      const res = await fetch("http://localhost:5000/api/v1/content", {
+      const res = await fetch(`${API_BASE_URL}/api/v1/content`, {
         method: "GET",
         headers: {
           "token": token
@@ -92,7 +94,7 @@ const HomePage = ()=>{
         return;
       }
 
-      const res = await fetch(`http://localhost:5000/api/v1/content`, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/content`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

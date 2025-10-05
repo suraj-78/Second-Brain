@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const RegisterPage = ()=>{
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const RegisterPage = ()=>{
     }
 
     try{
-     const res = await fetch("http://localhost:5000/api/v1/signup", {
+     const res = await fetch(`${API_BASE_URL}/api/v1/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -63,7 +63,7 @@ const RegisterPage = ()=>{
     }
 
     try{
-      const res = await fetch("http://localhost:5000/api/v1/signin", {
+      const res = await fetch(`${API_BASE_URL}/api/v1/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

@@ -2,7 +2,7 @@ import ButtonUi from "../components/ButtonUi/Button";
 import SideNavbar from "../components/SideNavbarUi/SideNavbar";
 import ShareIcon from "../components/icons/ShareIcon";
 import PlusIcon from "../components/icons/PlusIcon";
-import { useContext, JSX, useEffect, useRef, useState } from "react";
+import {  JSX, useEffect, useState } from "react";
 import Modal from "../components/ModalUi/Modal";
 import Card from "../components/CardUi/Card";
 import { useNavigate } from "react-router-dom";

@@ -17,7 +17,7 @@ const HomePage = ()=>{
   const [data1, setData] = useState<any[]>([]);
   const [ytData, setYTData] = useState<any[]>([]);
   const [notionData, setNitionData] = useState<any[]>([]);
-  const [shareData, setShareData] = useState<any[]>([]);
+  // const [shareData, setShareData] = useState<any[]>([]);
   const [dataShow, setDataShow] = useState("All");
   let show: JSX.Element | JSX.Element[] = data1;
 
@@ -103,12 +103,12 @@ const HomePage = ()=>{
         credentials: "include",
       });
       const jsonData = await res.json();
-      setShareData(jsonData.data);
+      const shareData = jsonData.data;
       //sharing/generating the link
       if (res.ok) {
         // Encode your data as a query parameter
         const encodedData = encodeURIComponent(JSON.stringify(jsonData.data));
-        const shareLink = `http://localhost:5173/share/${userId}?data=${encodedData}`;
+        const shareLink = `${FRONTEND_BASE_URL}/share/${userId}?data=${encodedData}`;
        
         navigator.clipboard.writeText(shareLink)
         .then(() => {

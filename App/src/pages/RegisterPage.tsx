@@ -22,6 +22,8 @@ const RegisterPage = ()=>{
     }
 
     try{
+      console.log("Form submitted", data);
+
      const res = await fetch(`${API_BASE_URL}/api/v1/signup`, {
         method: "POST",
         headers: {
@@ -63,6 +65,8 @@ const RegisterPage = ()=>{
     }
 
     try{
+      console.log("Form submitted", data);
+
       const res = await fetch(`${API_BASE_URL}/api/v1/signin`, {
         method: "POST",
         headers: {
@@ -98,7 +102,7 @@ const RegisterPage = ()=>{
           <input type="email" placeholder="Email" required name="email" className="outline-none h-12 w-[22vw] rounded-lg p-2 hover:bg-slate-100"/>
           <input type="password" placeholder="Password" required name="password" className="outline-none h-12 w-[22vw] rounded-lg p-2 hover:bg-slate-100"/>
           <div>
-          <button className="bg-blue-400 px-4 py-2 rounded-2xl font-semibold hover:bg-blue-500">Create my Account</button>
+          <button type="submit" className="bg-blue-400 px-4 py-2 rounded-2xl font-semibold hover:bg-blue-500">Create my Account</button>
           </div>
         </form>
       </div>
@@ -114,7 +118,7 @@ const RegisterPage = ()=>{
       <input type="email" placeholder="Email" required name="email" className="outline-none h-12 w-[22vw] rounded-lg p-2 bg-slate-100 hover:bg-slate-200 block shadow-md"/>
       <input type="password" placeholder="Password" required name="password" className="outline-none h-12 w-[22vw] rounded-lg p-2 bg-slate-100 hover:bg-slate-200 block shadow-md"/>
       <div>
-          <button className="bg-blue-400 px-4 py-2 rounded-2xl font-semibold hover:bg-blue-500 shadow-md mt-2">Login</button>
+          <button type="submit" className="bg-blue-400 px-4 py-2 rounded-2xl font-semibold hover:bg-blue-500 shadow-md mt-2">Login</button>
       </div>
       </form>
     </div>

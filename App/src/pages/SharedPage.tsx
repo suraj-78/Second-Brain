@@ -1,39 +1,41 @@
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Card from "../components/CardUi/Card";
 import { useEffect, useState } from "react";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const SharedPage = () => {
-  // const { id } = useParams();
-  const location = useLocation();
+  const { id: userId } = useParams(); 
   const [sharedData, setSharedData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // First try to get data from location state (if navigated within app)
-    if (location.state?.shared) {
-      setSharedData(location.state.shared);
-    } else {
-      // If no state, try to get from URL query params
-      const queryParams = new URLSearchParams(location.search);
-      const dataParam = queryParams.get('data');
-      if (dataParam) {
-        try {
-          const decodedData = JSON.parse(decodeURIComponent(dataParam));
-          setSharedData(decodedData);
-        } catch (e) {
-          console.error("Failed to parse shared data", e);
-        }
+    const fetchSharedData = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/api/v1/share/${userId}`);
+        if (!res.ok) throw new Error("Failed to fetch shared data");
+
+        const jsonData = await res.json();
+        setSharedData(jsonData.data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
-    }
-  }, [location]);
+    };
+
+    fetchSharedData();
+  }, [userId]);
 
   return (
-    <div className="bg-slate-200 w-full min-h-screen">
-      <div className="flex justify-between">
-        <div className="font-bold text-3xl mt-4 ml-8">Shared Content By Second Brain...</div>
-      </div>
-      <div className="ml-7 mt-6 flex flex-wrap gap-x-3 gap-y-5">
-        {sharedData.length > 0 ? (
-          sharedData.map((item: any, idx: number) => (
+    <div className="bg-slate-200 w-full min-h-screen p-6">
+      <h1 className="text-3xl font-bold mb-6">Shared Content By Second Brain...</h1>
+
+      {loading ? (
+        <div className="text-2xl font-semibold">Loading...</div>
+      ) : sharedData.length > 0 ? (
+        <div className="flex flex-wrap gap-x-3 gap-y-5">
+          {sharedData.map((item: any, idx: number) => (
             <Card
               key={idx}
               icon={item.contentType}
@@ -41,11 +43,11 @@ const SharedPage = () => {
               title={item.title}
               link={item.link}
             />
-          ))
-        ) : (
-          <div className="text-2xl font-semibold">No shared content found.</div>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="text-2xl font-semibold">No shared content found.</div>
+      )}
     </div>
   );
 };

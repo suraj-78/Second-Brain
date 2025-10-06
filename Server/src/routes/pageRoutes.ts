@@ -10,6 +10,6 @@ router.post("/signup",registeration)
 router.post("/signin",login)
 router.post("/addcontent",isAuthenticated,newContent)
 router.delete("/delete/:contentId",isAuthenticated,deleteContent)
-router.get("/share/:userId",isAuthenticated,shareContent)
+router.get("/share/:userId",shareContent)
 
 export default router;

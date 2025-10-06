@@ -83,49 +83,23 @@ const HomePage = ()=>{
     )
   }
 
-  async function share(){
-    try{
-      const token = localStorage.getItem("token");
-      const userId = localStorage.getItem("userId");
-
-      if(!token || !userId){
-        alert("Please log in first");
-        navigate("/"); 
-        return;
-      }
-
-      const res = await fetch(`${API_BASE_URL}/api/v1/content`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "token": token
-        },
-        credentials: "include",
-      });
-      const jsonData = await res.json();
-      // const shareData = jsonData.data;
-      //sharing/generating the link
-      if (res.ok) {
-        // Encode your data as a query parameter
-        const encodedData = encodeURIComponent(JSON.stringify(jsonData.data));
-        const frontendBaseUrl = window.location.origin; 
-        const shareLink = `${frontendBaseUrl}/share/${userId}?data=${encodedData}`;
-       
-        navigator.clipboard.writeText(shareLink)
-        .then(() => {
-          alert("Shareable link copied to clipboard!");
-        })
-        .catch((err) => {
-          console.error("Failed to copy link: ", err);
-          alert("Failed to copy link to clipboard. Here's the link to share manually:\n" + shareLink);
-        });
-      } else {
-        alert("Something went wrong while sharing.");
-      }
-      }catch(err){
-        console.log("Error while sending data");
-      }
+  async function share() {
+  const userId = localStorage.getItem("userId");
+  if (!userId) {
+    alert("Please log in first");
+    return;
   }
+
+  const frontendBaseUrl = window.location.origin;
+  const shareLink = `${frontendBaseUrl}/share/${userId}`;
+
+  navigator.clipboard.writeText(shareLink)
+    .then(() => alert("Shareable link copied to clipboard!"))
+    .catch(err => {
+      console.error(err);
+      alert("Failed to copy link. Here's the link:\n" + shareLink);
+    });
+}
 
   return <div className="flex">
    <SideNavbar setData={setData} setYTData={setYTData} setNitionData={setNitionData} data1={data1} setDataShow={setDataShow}/>

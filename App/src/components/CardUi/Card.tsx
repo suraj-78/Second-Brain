@@ -6,6 +6,7 @@ import { format } from 'date-fns'
 import { JSX, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TwitterIcon from "../icons/TwitterIcon";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
 interface CardProps {
@@ -92,7 +93,7 @@ const Card = (props: CardProps) => {
         return;
       }
 
-      const res = await fetch(`http://localhost:5000/api/v1/delete/${props.title}`, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/delete/${props.title}`, {
         method: "Delete",
         headers: {
           "token": token

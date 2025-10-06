@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Modal = (props: {onClick: () => void,setModal: (value: boolean) => void, setReloadData: ()=> void}) => {
 
@@ -36,7 +37,7 @@ const Modal = (props: {onClick: () => void,setModal: (value: boolean) => void, s
         return;
       }
 
-      await fetch("http://localhost:5000/api/v1/addcontent", {
+      await fetch(`${API_BASE_URL}/api/v1/addcontent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

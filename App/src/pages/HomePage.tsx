@@ -108,7 +108,8 @@ const HomePage = ()=>{
       if (res.ok) {
         // Encode your data as a query parameter
         const encodedData = encodeURIComponent(JSON.stringify(jsonData.data));
-        const shareLink = `${API_BASE_URL}/share/${userId}?data=${encodedData}`;
+        const frontendBaseUrl = window.location.origin; 
+        const shareLink = `${frontendBaseUrl}/share/${userId}?data=${encodedData}`;
        
         navigator.clipboard.writeText(shareLink)
         .then(() => {

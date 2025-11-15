@@ -30,18 +30,11 @@ const Modal = (props: {onClick: () => void,setModal: (value: boolean) => void, s
       tag,
     };
     try{
-      const token = localStorage.getItem("token");
-      if(!token){
-        alert("Please log in first");
-        navigate("/"); 
-        return;
-      }
 
       await fetch(`${API_BASE_URL}/api/v1/addcontent`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "token": token
+          "Content-Type": "application/json"
         },
         credentials: "include",
         body: JSON.stringify(data)

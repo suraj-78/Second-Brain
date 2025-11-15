@@ -3,12 +3,14 @@ import NavFields from "./NavFields";
 import YoutubeIcon from "../icons/YoutubeIcon";
 import DocumentIcon from "../icons/DocumentIcon";
 import All from "../icons/All";
+import TwitterIcon from "../icons/TwitterIcon";
 
 interface SideNavbarProps {
   data1 : any,
   setData: any,
   setYTData:any,
   setNitionData: any,
+  setTwitterData: any,
   setDataShow: any
 }
 
@@ -20,8 +22,15 @@ const SideNavbar = (props: SideNavbarProps)=>{
     props.setDataShow("Youtube");
   }
 
+  function tw(){
+    const twData = props.data1.filter((item: any) => item.contentType === "Twitter");
+    props.setTwitterData(twData);
+    props.setDataShow("Twitter");
+  }
+
   function nt(){
-    const ntData = props.data1.filter((item: any) => item.contentType === "Notion" || item.contentType === "Twitter");
+    // 5. MODIFY THIS FUNCTION
+    const ntData = props.data1.filter((item: any) => item.contentType === "Notion"); // <-- Remove "Twitter"
     props.setNitionData(ntData);
     props.setDataShow("Notion");
   }
@@ -37,6 +46,7 @@ const SideNavbar = (props: SideNavbarProps)=>{
         <div className="pt-7">
           <div onClick={al}><NavFields text={"All"} startIcon={<All />} /></div>
           <div onClick={yt}><NavFields text={"Youtube"} startIcon={<YoutubeIcon />} /></div>
+          <div onClick={tw}><NavFields text={"Twitter"} startIcon={<TwitterIcon />} /></div>
           <div onClick={nt}><NavFields text={"Documents"} startIcon={<DocumentIcon />} /></div>
         </div>
     </div> 

@@ -10,6 +10,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
 interface CardProps {
+  _id : string,
   icon: "Youtube" | "Twitter" | "Notion";
   tag: "Productivity" | "Tech & Tools" | "Mindset" | "Learning & Skills" | "Workflows" | "Inspiration";
   title: string;
@@ -86,18 +87,9 @@ const Card = (props: CardProps) => {
   
   async function deleteHandle(){
     try{
-      const token = localStorage.getItem("token");
-      if(!token){
-        alert("Please log in first");
-        navigate("/"); 
-        return;
-      }
-
-      const res = await fetch(`${API_BASE_URL}/api/v1/delete/${props.title}`, {
+      
+      const res = await fetch(`${API_BASE_URL}/api/v1/delete/${props._id}`, {
         method: "Delete",
-        headers: {
-          "token": token
-        },
         credentials: "include"
       });
       if(res.ok){

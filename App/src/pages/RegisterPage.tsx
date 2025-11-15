@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const RegisterPage = ()=>{
   const navigate = useNavigate();
 
@@ -77,7 +78,6 @@ const RegisterPage = ()=>{
       });
       const backendData = await res.json();
       if (res.ok) {
-        localStorage.setItem("token", backendData.token)
         localStorage.setItem("userId",backendData.userID)
         alert("Logged in Successfully");
         navigate("/HomePage"); 

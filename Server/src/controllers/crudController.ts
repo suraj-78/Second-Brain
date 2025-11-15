@@ -8,7 +8,7 @@ export const newContent = async(req: AuthRequest,res: Response)=>{
     const userid = req.userID;
 
     //checking whether user given all the field or not
-    if (!link || !contentType || !title || !userid) {
+    if (!link || !contentType || !title || !userid || !tag) {
       res.status(400).json({ message: "All fields are required" });
       return;
     }

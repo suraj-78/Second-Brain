@@ -66,8 +66,9 @@ export const login = async(req: Request,res: Response)=>{
       email: email
     })
 
+    // FIX: Use generic error message for security
     if (!User || !User.password) {
-        res.status(404).json({ message: "User not found or password is missing" });
+        res.status(401).json({ message: "Invalid credentials" });
         return;
     }
 
@@ -85,16 +86,11 @@ export const login = async(req: Request,res: Response)=>{
     const token = jwt.sign({userID:User._id},process.env.SECRET_KEY, {
       expiresIn: '1h'
     });
-    // res.cookie("token",token, {
-    //   httpOnly: true,
-    //   secure: false,       
-    //   maxAge: 3600000,
-    //   path: '/'  
-    // }); 
-
+    
+    // FIX: Send token in JSON, not as a cookie
     res.status(200).json({
       message: "user logged in successfully",
-      token,
+      token: token, // <-- This sends the token to the frontend
       userID: User._id 
     })
     return;
